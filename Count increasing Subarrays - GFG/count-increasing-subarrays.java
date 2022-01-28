@@ -33,35 +33,26 @@ public class Main {
 
 
 class Solution {
-    int countIncreasing(int nums[], int n) {
-        if(nums.length==1)
-        {
-            return 0;
-        }
-        if(nums.length==2 && nums[0]<nums[1])
-        {
-            return 1;
-        }
-        int c=0;
-        
-        int j=0;
-        int last=nums[0];
-        for(int i=1;i<nums.length;i++)
-        {
-           
-               if(last<nums[i])
-               {
-                   c+=(i-j);
-               }
-               else{
-                 j=i;
-               }
-               last=nums[i];
-           
-            
-            
-        }
-        return c;
+    int countIncreasing(int arr[], int n) {
+           int len=1;
+	    int count=0;
+	    for(int i=0;i<n-1;i++)
+	    {
+	        if(arr[i+1]>arr[i])
+	        {
+	            len++;
+	        }
+	        else
+	        {
+	            count+=len*(len-1)/2;
+	            len=1;
+	        }
+	    }
+	    if(len>1)
+	    {
+	        count+=len*(len-1)/2;
+	    }
+	    return count;
 
     }
 }
