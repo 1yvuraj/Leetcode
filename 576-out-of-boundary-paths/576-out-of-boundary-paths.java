@@ -7,7 +7,7 @@ class Solution {
         for(int[] c2 : c1)
         Arrays.fill(c2,-1);
          
-        return ok(m,n,maxMove,startRow,startColumn,dp);
+        return ok(m,n,maxMove,startRow,startColumn,dp) % mod;
     }
     public int ok(int m,int n,int maxMove,int startRow,int startColumn,int[][][]dp)
     {
