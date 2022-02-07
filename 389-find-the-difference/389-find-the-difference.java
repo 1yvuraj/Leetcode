@@ -1,19 +1,27 @@
 class Solution {
-    public char findTheDifference(String s, String t) 
-    {
-       char sstring[]=s.toCharArray();
-        char tstring[]=t.toCharArray();
-        Arrays.sort(sstring);
-        Arrays.sort(tstring);
-        int len=Math.min(s.length(),t.length());
-        for(int i=0;i<len;i++)
+    public char findTheDifference(String s, String t) {
+        HashMap<Character,Integer>map=new HashMap<>();
+        for(int i=0;i<s.length();i++)
         {
-            if(sstring[i]!=tstring[i])
-            {
-                return tstring[i];
+            if(map.containsKey(s.charAt(i))) {
+            map.put(s.charAt(i),map.get(s.charAt(i))+1);
+            }else{
+                 map.put(s.charAt(i),1);
             }
         }
-        return tstring[tstring.length-1];
-        
+        char ch = '\0';
+        for(int i=0;i<t.length();i++)
+        {
+            if(map.containsKey(t.charAt(i))) {
+                map.put(t.charAt(i),map.get(t.charAt(i))-1);
+                if(map.get(t.charAt(i))==0)
+                map.remove(t.charAt(i));
+                
+            }else {
+                ch= t.charAt(i);
+                break;
+            }
+        }
+        return ch;
     }
 }
