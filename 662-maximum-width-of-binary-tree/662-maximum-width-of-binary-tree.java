@@ -72,10 +72,10 @@ class Solution {
                 long w = p.w;
                 li = w;
                 if (node.left != null){
-                    que.addLast(new pair(node.left, 2 * w));
+                    que.addLast(new pair(node.left, 2 * w+1));
                 }
                 if (node.right != null){
-                    que.addLast(new pair(node.right, 2 * w + 1));
+                    que.addLast(new pair(node.right, 2 * w + 2));
                 }
             }
             ans = Math.max(ans, (int) (li - fi + 1));
