@@ -60,7 +60,7 @@ class Solution {
     }
     public int widthOfBinaryTree(TreeNode root) {
         LinkedList<pair> que = new LinkedList<>();
-        que.addLast(new pair(root, 1));
+        que.addLast(new pair(root, 0));
         int ans = 0;
         while (que.size() != 0) {
             int size = que.size();
