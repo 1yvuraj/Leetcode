@@ -22,7 +22,7 @@ class Solution {
         if(root==null)return 0;
         if(root.left==null && root.right==null )return root.val;
         
-        return maxPathSu(root).NtNpath;
+        return Math.max(maxPathSu(root).NtNpath,maxPathSu(root).RtNpath);
     }
 
     
