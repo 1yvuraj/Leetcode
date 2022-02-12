@@ -27,9 +27,12 @@ class Solution {
         help(root.left,k);
         d++;
         if(d==k){
+            
             ans=root.val;
             return;
         }
+        
+        
         help(root.right,k);
         
     }
