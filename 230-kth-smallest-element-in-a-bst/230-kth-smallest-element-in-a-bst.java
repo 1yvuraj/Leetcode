@@ -25,14 +25,14 @@ class Solution {
         if(root==null)return;
         
         help(root.left,k);
-        d++;
-        if(d==k){
+        
+        if(++d==k){
             
             ans=root.val;
+            
             return;
         }
-        
-        
+
         help(root.right,k);
         
     }
