@@ -25,7 +25,7 @@ public class Solution {
         }else{
            for(int i=0;i<gap;i++)second=second.next;  
         }
-        ListNode cur=fi>si?headA:headB;
+        ListNode cur=fi>si?first:second;
         while(cur!=null && first!=second)
         {
             if(second!=null)second=second.next;
