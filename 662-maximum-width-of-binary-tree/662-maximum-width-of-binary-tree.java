@@ -25,8 +25,6 @@ class Solution {
         }
     }
 
-     // static int max = 0;
-
     public int widthOfBinaryTree(TreeNode root) {
         LinkedList<pair> q = new LinkedList<>();
         int ans=0;
@@ -50,37 +48,3 @@ class Solution {
         return ans;
     }
 }
-// class Solution {
-//     public class pair {
-//         TreeNode node = null;
-//         long w = 0;
-//         pair(TreeNode node, long w) {
-//             this.node = node;
-//             this.w = w;
-//         }
-//     }
-//     public int widthOfBinaryTree(TreeNode root) {
-//         LinkedList<pair> que = new LinkedList<>();
-//         que.addLast(new pair(root, 0));
-//         int ans = 0;
-//         while (que.size() != 0) {
-//             int size = que.size();
-//             long fi = que.getFirst().w;
-//             long li = que.getFirst().w;
-//             while (size-- > 0) {
-//                 pair p = que.removeFirst();
-//                 TreeNode node = p.node;
-//                 long w = p.w;
-//                 li = w;
-//                 if (node.left != null){
-//                     que.addLast(new pair(node.left, 2 * w+1));
-//                 }
-//                 if (node.right != null){
-//                     que.addLast(new pair(node.right, 2 * w + 2));
-//                 }
-//             }
-//             ans = Math.max(ans, (int) (li - fi + 1));
-//         }
-//         return ans;
-//     }
-// }
