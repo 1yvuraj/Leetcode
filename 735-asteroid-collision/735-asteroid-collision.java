@@ -10,7 +10,7 @@ class Solution {
                 }
                 if (st.size() > 0 && st.peek() == arr[i] * -1) {
                     st.pop();
-                } else if (st.size() > 0 && st.peek() >=arr[i] * -1) {
+                } else if (st.size() > 0 && st.peek() >arr[i] * -1) {
                     continue;
                 } else {
                     st.push(arr[i]);
