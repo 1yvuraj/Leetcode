@@ -21,15 +21,20 @@ class Solution {
         
     }
     public int help(TreeNode root) {
-        if(root==null)return Integer.MAX_VALUE;
-        if(root.left == null && root.right==null)
-        {
+        if(root==null)return 0;
+        if(root.left == null && root.right == null){
             return 1;
+        }else if(root.left == null){
+            return help(root.right)+1;
+        }else if(root.right == null){
+            return help(root.left)+1;
+        }else{
+            int l=help(root.left);
+            int r=help(root.right);
+            return Math.min(l,r)+1;
         }
-        int l=help(root.left);
-        int r=help(root.right);
         
-        return Math.min(l,r)+1;
-    }  
+        
+    }   
     
 }
