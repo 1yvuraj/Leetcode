@@ -9,24 +9,42 @@
  * }
  */
 class Solution {
-
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode dummy = new ListNode(-1);
-        ListNode itr=dummy ;
+        ListNode c1=l1;
+        ListNode c2=l2;
+        ListNode dummy=new ListNode(1000);
+        ListNode itr=dummy;
+        int c=0;
         
-        ListNode c1 = l1;
-        ListNode c2 = l2;
-        int c = 0;
-        while (c1 != null || c2 != null || c != 0) {
-            int sum=(c1==null?0:c1.val)+(c2==null?0:c2.val)+c;
+        while(c1!=null || c2!=null|| c!=0)
+        {
+            
+            int sum=(c1!=null?c1.val:0) + (c2!=null?c2.val:0)+c;
+            c=sum/10;
             int rem=sum%10;
-             c=sum/10;
-            ListNode n=new ListNode(rem);
-            itr.next=n;
+            ListNode node=new ListNode(rem);
+            itr.next=node;
             if(c1!=null)c1=c1.next;
             if(c2!=null)c2=c2.next;
             itr=itr.next;
         }
         return dummy.next;
+        
     }
+//     public ListNode reverseList(ListNode head) {
+//         if (head == null || head.next == null)
+//             return head;
+
+//         ListNode prev = null, curr = head;
+//         while (curr != null) {
+//             ListNode forw = curr.next; // backup
+
+//             curr.next = prev; // link
+
+//             prev = curr;
+//             curr = forw;
+//         }
+
+//         return prev;
+//     }
 }
