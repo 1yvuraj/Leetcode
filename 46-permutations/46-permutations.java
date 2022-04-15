@@ -1,30 +1,36 @@
 class Solution {
-    List<List<Integer>> out = new ArrayList<>() ; 
-    int n ; 
-    int[] nums ; 
     public List<List<Integer>> permute(int[] nums) {
-        this.nums = nums ; 
-        this.n = nums.length ; 
-        List<Integer> l = new ArrayList<>() ; 
-        dfs(l , new HashSet<Integer>()); 
-        return out ;
+        List<List<Integer>> ans = new ArrayList<>();
+        ArrayList<Integer> smallAns = new ArrayList<>();
+        int tar=0;
+        for(int i=0;i<nums.length;i++)
+        {
+            tar+=nums[i];
+        }
+        permute(nums,0, ans, smallAns);
+        return ans;
     }
     
-    
-    public void dfs(List<Integer> currentList, HashSet<Integer>s ){
-        if(currentList.size() == n){
-            out.add(new ArrayList<>(currentList)); 
-            return ; 
+    public static int permute(int[] coins, int idx,List<List<Integer>> ans,ArrayList<Integer> smallAns) {
+        if (idx == coins.length) {
+            ArrayList<Integer> base=new ArrayList<>(smallAns);
+            ans.add(base);
+            return 1;
         }
-        
-        for(int i = 0 ; i < n ; i++){
-            if(!s.contains(nums[i])){
-                currentList.add(nums[i]); 
-                s.add(nums[i]); 
-                dfs(currentList , s ); 
-                currentList.remove(currentList.size() -1);  
-                s.remove(nums[i]);
+
+        int count = 0;
+        for (int i = 0; i < coins.length; i++) {
+            if (coins[i] >-11 ) {
+                int val = coins[i];
+                coins[i] = -11;
+                smallAns.add(val);
+                count += permute(coins,idx+1,ans,smallAns);
+                coins[i] = val;
+                smallAns.remove(smallAns.size()-1);
             }
         }
+
+        return count;
     }
+
 }
