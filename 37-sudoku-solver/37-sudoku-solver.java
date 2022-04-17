@@ -1,64 +1,58 @@
 class Solution {
-    public void solveSudoku(char[][] board) {
-        ArrayList<Integer> list = new ArrayList<>(); // blank places
-        int n = 9;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (board[i][j] == '.') {
-                    list.add(i * n + j);
-                }
-            }
-        }
-        sudokuSolver(board,list,0);
+    public static void solveSudoku(char[][]board) {
+        int n=board.length;
+       ArrayList<Integer>idx=new ArrayList<>();
+       for(int i=0;i<9;i++)
+       {
+           for(int j=0;j<9;j++)
+           {
+               if(board[i][j]=='.')
+               {
+                   idx.add(i*n+j);
+               }
+           }
+       }
+       sudukusolver(board,idx,0);
     }
-    
-    public boolean sudokuSolver(char[][] board, ArrayList<Integer> list, int idx) {
-        if (idx == list.size())
-            return true;
-
-        int r = list.get(idx) / 9;
-        int c = list.get(idx) % 9;
-
-        for (int num = 1; num <= 9; num++) {
-            if (isPossibleToPlaceNumber(board, r, c, num)) {
-                board[r][c] = (char) ('0' + num);
-
-                if (sudokuSolver(board, list, idx + 1))
-                    return true;
-
-                board[r][c] = '.';
-            }
-        }
-
-        return false;
+    public static boolean sudukusolver(char[][]board,ArrayList<Integer>ans,int idx) {
+       if(idx==ans.size())
+       {
+           return true;
+       }
+       int r=ans.get(idx)/9;
+       int c=ans.get(idx)%9;
+       for(int i=1;i<=9;i++)
+       {
+           if(ispossible(board,r,c,i)){
+           board[r][c]=(char)('0'+i);
+           if(sudukusolver(board,ans,idx+1))return true;
+           board[r][c]='.';
+           }
+       }
+       return false;
     }
-        public boolean isPossibleToPlaceNumber(char[][] board, int r, int c, int num) {
-
-        // row
-        for (int i = 0; i < 9; i++) {
-            if (board[i][c] - '0' == num)
-                return false;
-        }
-
-        // col
-        for (int i = 0; i < 9; i++) {
-            if (board[r][i] - '0' == num)
-                return false;
-        }
-
-        // 3 X 3
-        r = (r / 3) * 3;
-        c = (c / 3) * 3;
-        for (int i = 0; i < 3; i++){
-            for (int j = 0; j < 3; j++){
-                if (board[r + i][c + j] - '0' == num){
-                    return false;
-                }
-            }
-        }
-
-        return true;
-
-    }
+    public static boolean ispossible(char[][]board,int r,int c,int num) {
+        int n=board.length;
+       for(int i=0;i<9;i++)
+       {
+        if(board[r][i]-'0'==num)return false;
+        
+       }
+       for(int i=0;i<9;i++)
+       {
+        if(board[i][c]-'0'==num)return false;
+        
+       }
+        r=(r/3)*3;
+        c=(c/3)*3;
+       for(int i=0;i<3;i++)
+       {
+           for(int j=0;j<3;j++)
+           {
+               if(board[i+r][j+c]-'0'==num)return false;
+           }
+       }
+       return true;
+     }
 
 }
