@@ -9,7 +9,7 @@ class Solution {
     public int jumpsolver(int[] nums,int[]dp,int n) {
         dp[n-1]=0;
         for (int i = n-2; i >=0; i--) {
-            int min = (int) 1e9;
+            int min = (int)1e9;
             for (int jump = 1; jump <= nums[i]; jump++) {
                 if(i+jump<dp.length)
                 {
