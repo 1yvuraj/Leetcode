@@ -1,25 +1,19 @@
 class MyHashMap {
-HashMap <Integer,Integer> map = new HashMap<Integer,Integer>();
-public MyHashMap() {
-
+    int[] arr;
+    public MyHashMap() {
+        arr = new int[(int)Math.pow(10, 6)+1];
+        Arrays.fill(arr, -1);
+    }
+    
+    public void put(int key, int value) {
+        arr[key] = value;
+    }
+    
+    public int get(int key) {
+        return arr[key];
+    }
+    
+    public void remove(int key) {
+        arr[key] = -1;
+    }
 }
-
-public void put(int key, int value) {
-    map.put(key,value);
-}
-
-public int get(int key) {
-  return (map.get(key) == null)?-1:map.get(key);
-}
-
-public void remove(int key) {
-  map.remove(key) ; 
-}
-}
-/**
- * Your MyHashMap object will be instantiated and called as such:
- * MyHashMap obj = new MyHashMap();
- * obj.put(key,value);
- * int param_2 = obj.get(key);
- * obj.remove(key);
- */
