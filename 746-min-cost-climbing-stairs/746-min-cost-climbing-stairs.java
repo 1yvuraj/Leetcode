@@ -1,49 +1,25 @@
-// class Solution {
-//      //recrsion
-//     public int minCostClimbingStairs(int[] cost) {
-//         int[] dp = new int[cost.length + 1];
-//         int f1 = minCostClimbingStairss(cost, dp);
-//         return f1;
-//     }
-
-//     public int minCostClimbingStairss(int[] cost, int[] dp) {
-//         for (int idx = 0; idx < dp.length; idx++) {
-//             if (idx == 0 || idx == 1) {
-//                 dp[idx] = 0;
-//                 continue;
-//             }
-//             int f1 = 0;
-//             int f2 = 0;
-//             if (idx - 2 >= 0) f1 = cost[idx - 2] + dp[idx - 2];
-//             if (idx - 1 >= 0) f2 = cost[idx - 1] + dp[idx - 1];
-//             dp[idx] = Math.min(f1, f2);
-//         }
-//         return dp[dp.length - 1];
-//     }
-// }
 class Solution {
-    //recrsion
     public int minCostClimbingStairs(int[] cost) {
-        int[]dp=new int[cost.length+1];
-       int f1=minCostClimbingStairss(cost,cost.length,dp);
-       return f1;
-     }
-    public int minCostClimbingStairss(int[] cost,int idx,int[]dp) 
-    {
-        if(idx<0)
-        {
-            return 0;
-        }
-        if(idx==0||idx==1)
-        {
-            return 0;
-        }
-        if(dp[idx]!=0)
-        {
-            return dp[idx];
-        }
-        int f1=cost[idx-2]+minCostClimbingStairss(cost,idx-2,dp);
-         int f2=cost[idx-1]+minCostClimbingStairss(cost,idx-1,dp);
-        return dp[idx]=Math.min(f1,f2);
+        int []dp=new int[cost.length+1];
+        return solve(cost,dp,cost.length);
     }
+    public int solve(int[] cost,int []dp,int n) {
+        
+        if(n<=1)return dp[n]=cost[n];
+        if(dp[n]!=0)return dp[n];
+        int f1=solve(cost,dp,n-1);
+        int f2=solve(cost,dp,n-2);
+        return dp[n]=Math.min(f1,f2)+(n==cost.length?0:cost[n]);
+        
+    }
+//     public int solve(int[] cost,int[]dp) {
+//         dp[0]=cost[0];
+//          dp[1]=Math.min(cost[0],cost[1]);
+//         for(int i=2;i<cost.length;i++)
+//         {
+//             dp[i]=Math.min(dp[i-2],dp[i-1])+cost[i];
+//         }
+//         return dp[dp.length-1];
+        
+//     }
 }
