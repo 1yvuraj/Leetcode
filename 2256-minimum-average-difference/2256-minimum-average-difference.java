@@ -13,7 +13,7 @@ class Solution {
         for (int i = 0; i < nums.length; i++) {
             left+=nums[i];
             right=sum-left;
-            long main = Math.abs(left / (i + 1) - (n - i == 1 ? 0 : right / (n -i - 1)));
+            long main = Math.abs(left / (i + 1) - (i == n-1 ? 0 : right / (n -i - 1)));
             if(min>main)
             {
                 min=main;
