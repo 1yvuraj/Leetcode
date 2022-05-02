@@ -1,36 +1,36 @@
 class Solution {
-    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
-        int [][]dp=new int[obstacleGrid.length][obstacleGrid[0].length];
-        if(dp[0][0]==1)
-        {
-            return 0;
+
+    public int helper(int sr, int sc, int er, int ec, int[][] dir, int[][] visited, int[][] dp) {
+        if (sr == er && sc == ec) {
+            dp[sr][sc] = 1;
         }
-       return  uniquePathsWithObstacless(obstacleGrid,0,0,obstacleGrid.length-1,obstacleGrid[0].length-1,dp);
+
+        if (dp[sr][sc] != 0) return dp[sr][sc];
+
+        visited[sr][sc] = 1;
+        int count = 0;
+        for (int d = 0; d < dir.length; d++) {
+            int r = sr + dir[d][0];
+            int c = sc + dir[d][1];
+
+            if (r >= 0 && c >= 0 && r <= er && c <= ec && visited[r][c] == 0) {
+                count += helper(r, c, er, ec, dir, visited, dp);
+                //dp[r][c] = count;
+            }
+        }
+
+        visited[sr][sc] = 0;
+
+        return dp[sr][sc] = count;
     }
-     public static int  uniquePathsWithObstacless(int [][] obstacleGrid,int sr, int sc, int dr, int dc,int[][] dp)
-  {
-    if(sr>dr ||sc>dc||obstacleGrid[sr][sc]!=0)
-    {
-        return 0;
+
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+        if (obstacleGrid[0][0] == 1 || obstacleGrid[m - 1][n - 1] == 1) return 0;
+
+        int dir[][] = { { 0, 1 }, { 1, 0 } };
+        int dp[][] = new int[m+1][n+1];
+        return helper(0, 0, m - 1, n - 1, dir, obstacleGrid, dp);
     }
-    if (sr == dr  && sc == dc )
-    {
-      return dp[sr][sc]=1 ;
-    }
-     
-    if(sr>dr||sc>dc)
-      return 0;
-     if(dp[sr][sc]!=0) return dp[sr][sc];
-    
-
-     int r=uniquePathsWithObstacless(obstacleGrid,sr, sc + 1, dr, dc,dp);
-
-
-     int c=uniquePathsWithObstacless(obstacleGrid,sr + 1, sc, dr, dc,dp);
-      return dp[sr][sc]=r+c;
-
-
-
-  }
-
 }
