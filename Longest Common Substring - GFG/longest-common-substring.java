@@ -32,24 +32,28 @@ class Solution{
     int longestCommonSubstr(String S1, String S2, int n, int m){
         return LCSub(S1,S2,n,m);
     }
-    public static int LCSub(String first,String second,int n,int m){
-        int[][] dp = new int[n+1][m+1];
-        int max = 0;
-        /*
-        if the characters at the end are the same then check inwards
-        else the string is not common and the size is reset to 0
-        keep storing the max size that can be found
-         */
-        for(int i=1;i<n+1;i++){
-            for(int j=1;j<m+1;j++){
-                if(first.charAt(i-1)==second.charAt(j-1)){
-                    dp[i][j] = 1 + dp[i-1][j-1];
-                }else{
-                    dp[i][j] = 0;
-                }
-                max = Math.max(max,dp[i][j]);
-            }
-        }
-        return max;
+    public static int LCSub(String first,String second,int N,int M){
+      int[][]dp=new int[first.length()+1][second.length()+1];
+      int max=-1;
+      for(int n=0;n<=N;n++)
+      {
+          for(int m=0;m<=M;m++)
+          {
+              if(n==0||m==0)
+              {
+                  dp[n][m]=0;
+                  continue;
+              }
+              if(first.charAt(n-1)==second.charAt(m-1))
+              {
+                  dp[n][m]=dp[n-1][m-1]+1;
+              }else{
+                  dp[n][m]=0;
+              }
+              max=Math.max(max,dp[n][m]);
+          }
+          
+      }
+      return max;
     }
 }
