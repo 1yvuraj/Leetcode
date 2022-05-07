@@ -2,7 +2,7 @@ class Solution {
     public int longestPalindromeSubseq(String s) {
        int i=0;
 	   int j=s.length()-1;
-	   int dp[][]=new int[s.length()+1][s.length()+1];
+	   int dp[][]=new int[s.length()][s.length()];
 	   for(int[] d:dp) Arrays.fill(d,-1);
 	   return longestPlaindromicSubsequence_memo(s,i,j,dp);
     }
