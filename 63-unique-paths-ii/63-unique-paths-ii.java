@@ -14,15 +14,17 @@ class Solution {
         }
         if (dp[sr][sc] != 0) return dp[sr][sc];
         int count = 0;
-         obstacleGrid[sr][sc]=1;
+         
         for (int d = 0; d < dir.length; d++) {
             int r = sr + dir[d][0];
             int c = sc + dir[d][1];
             if (r >= 0 && c >= 0 && r <= er && c <= ec && obstacleGrid[r][c]!=1) {
+                obstacleGrid[r][c]=1;
                 count += mazePath2(r, c, er, ec, dir, obstacleGrid, dp);
+                obstacleGrid[r][c]=0;
             }
         }
-         obstacleGrid[sr][sc]=0;
+         
         return dp[sr][sc] = count;
     }
 }
