@@ -29,21 +29,25 @@ class Solution
 	{ 
 	   //code here.
 	   int[]dp=new int[arr.length];
-	   return LIS_SumDP(arr,dp);
+	   return lengthOfLIS(arr);
 	} 
-	public static int LIS_SumDP(int[] arr, int[] dp) {
-        int maxSum = 0, n = arr.length;
-        for (int i = 0; i < n; i++) {
-            dp[i] = 1;
-            for (int j = i - 1; j >= 0; j--) {
-                if (arr[j] <arr[i]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
-                }
-            }
-
-            maxSum = Math.max(maxSum, dp[i]);
-        }
-
-        return arr.length-maxSum;
+	public int lengthOfLIS(int[] nums) {
+        int[]dp=new int[nums.length];
+        int maxs=Integer.MIN_VALUE;
+       for(int i=0;i<nums.length;i++) 
+       {
+           int max=0;
+           for(int j=0;j<i;j++)
+           {
+               if(nums[i]>nums[j])
+                max=Math.max(dp[j],max) ;
+           }
+           
+           dp[i]=max+1;
+           maxs=Math.max(dp[i],maxs);
+           
+       }
+        return  nums.length-maxs;
+        
     }
 }
