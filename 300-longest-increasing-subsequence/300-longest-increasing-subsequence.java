@@ -1,7 +1,6 @@
 class Solution {
     public int lengthOfLIS(int[] nums) {
         int[]dp=new int[nums.length];
-        
         int maxs=Integer.MIN_VALUE;
        for(int i=0;i<nums.length;i++) 
        {
