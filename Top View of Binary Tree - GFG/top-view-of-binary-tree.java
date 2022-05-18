@@ -148,9 +148,9 @@ class Solution
         if(root==null)return ans;
         while(list.size()>0)
         {
-            int size=list.size();
-            for(int i=0;i<size;i++)
-            {
+           
+           
+            
                 pair p=list.removeFirst();
                 if( !map.containsKey(p.cn))
                 {map.put(p.cn,p.node.data);
@@ -165,10 +165,8 @@ class Solution
                 {
                     list.addLast(new pair(p.node.right,p.cn+1));
                 }
-            }
+            
         }
-        // for(Map.Entry<Integer,Integer> e:map.entrySet())
-        //       ans.add(e.getValue());
          for(int i=min;i<=max;i++)
          {
              ans.add(map.get(i));
