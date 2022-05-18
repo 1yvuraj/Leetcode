@@ -142,8 +142,7 @@ class Solution
         while(list.size()>0)
         {
             int size=list.size();
-            for(int i=0;i<size;i++)
-            {
+            
                 pair p=list.removeFirst();
                 
                 map.put(p.cn,p.node.data);
@@ -158,7 +157,7 @@ class Solution
                 {
                     list.addLast(new pair(p.node.right,p.cn+1));
                 }
-            }
+            
         }
          for(int i=min;i<=max;i++)
          {
