@@ -16,19 +16,3 @@ class Solution {
         return main;
     }
 }
-// class Solution {
-// 	public static List<String> removeAnagrams(String[] words) {
-// 		List<String> ans = new ArrayList<>();
-// 		String next = "";
-// 		for (int i = 0; i < words.length; i++) {
-// 			char tempArray[] = words[i].toCharArray();
-// 			Arrays.sort(tempArray);
-// 			String temp = new String(tempArray);
-// 			if ((!temp.equals(next))) {
-// 				ans.add(words[i]);
-// 			}
-// 			next = temp;
-// 		}
-// 		return ans;
-// 	}
-// }
