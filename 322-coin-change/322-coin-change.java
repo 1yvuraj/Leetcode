@@ -3,6 +3,7 @@ class Solution {
         int dp[]=new int[amount+1];
         Arrays.fill(dp,-1);
         int ans=coinChange(coins,amount,dp);
+        
         return ans==(int)1e9?-1:ans;
     }
     
@@ -18,6 +19,24 @@ class Solution {
         for(int i=0;i<coins.length;i++){
             minCoins=Math.min(minCoins,coinChange(coins,tar-coins[i],dp)+1);
         }
-        return dp[tar]= minCoins;
+        return dp[tar]=minCoins;
     }
+//     public int coinChange(int[] coins, int tar,int dp[]){
+//         for(int i=0;i<dp.length;i++)
+//         {
+//         if(tar==0){
+//             dp[i]=0;
+//             continue;
+//         }
+//         int minCoins=(int)1e9;
+//         for(int k=0;k<coins.length;k++){
+//             if(tar-coins[k]>=0){
+//             minCoins=Math.min(minCoins,dp[tar-coins[k]]);
+//             }
+         
+//         }
+//         dp[i]= minCoins+1;
+//         }  
+//          return dp[dp.length-1];
+//     }
 }
