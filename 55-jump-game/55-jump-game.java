@@ -1,25 +1,24 @@
-class Solution {
+class Solution{
     public boolean canJump(int[] nums) {
-        int n=nums.length;
-        int[]dp=new int[n];
-        for(int i=0;i<dp.length;i++)
-        {
-            dp[i]=-1;
-        }
-        return jumpsolver(nums,dp,n)<0?false:true;
+       boolean []dp=new boolean[nums.length+1];
+       return help(nums,dp);
     }
-    public int jumpsolver(int[] nums,int[]dp,int n) {
-        dp[n-1]=0;
-        for (int i = n-2; i >=0; i--) {
-            int min = -(int)1e9;
-            for (int jump = 1; jump <= nums[i]; jump++) {
-                if(i+jump<dp.length)
-                {
-                    min=Math.max(min,dp[i+jump]);
-                }
-            }
-            dp[i]=min+1;
-        }
-        return dp[0];
-    }
+    public boolean help(int[] nums,boolean []dp) {
+       dp[nums.length-1]=true;
+      for(int i=nums.length-2;i>=0;i--)
+      {
+         
+          for(int j=1;j<=nums[i];j++)
+          {
+              if(j+i<dp.length)
+              {
+                  if(dp[j+i]){
+                      dp[i]=true;
+                      break;
+                  }
+              }
+          }
+      }
+       return dp[0] ;
+    } 
 }
