@@ -1,63 +1,48 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
 class Solution {
-
-    public static TreeNode ok(TreeNode temp, TreeNode p) {
-        while (temp.right != null && temp.right != p) {
-            temp = temp.right;
-        }
-        return temp;
-    }
-
-    public static void recoverTree(TreeNode root) {
-        TreeNode cur = root, p = null, a = null, b = null;
-
+    public void recoverTree(TreeNode root) {
+        TreeNode cur = root;
+        TreeNode n1 = null;
+        TreeNode n2 = null;
+        TreeNode prev = null;
         while (cur != null) {
-            TreeNode temp = cur.left;
-            if (temp == null) {
-                if (p != null && p.val > cur.val) {
-                    if (a == null) {
-                        a = p;
+            if (cur.left == null) {
+                if(prev != null && prev.val > cur.val) {
+                    if(n1 == null) {
+                        n1 = prev;
+                        n2 = cur;
+                    } else {
+                        n2 = cur;
                     }
-                    b = cur;
                 }
-                p = cur;
+                prev = cur;
                 cur = cur.right;
             } else {
-                TreeNode leftmostnode = ok(temp, cur);
-                if (leftmostnode.right != cur) {
-                    leftmostnode.right = cur;
+                TreeNode p = cur.left;
+                while (p.right != null && p.right != cur) {
+                    p = p.right;
+                }
+                if (p.right == null) {
+                    p.right = cur;
                     cur = cur.left;
-                } else {
-                    leftmostnode.right = null;
-                    if (p != null && p.val > cur.val) {
-                        if (a == null) {
-                            a = p;
+                }
+                if(p.right == cur){
+                    if (prev != null && prev.val > cur.val) {
+                        if (n1 == null) {
+                            n1 = prev;
+                            n2 = cur;
+                        } else {
+                            n2 = cur;
                         }
-                        b = cur;
                     }
-                    p = cur;
+                    prev = cur;
+                    p.right = null;
                     cur = cur.right;
                 }
             }
         }
-        if (a != null) {
-            int temp = a.val;
-            a.val = b.val;
-            b.val = temp;
-        }
+        int temp=n1.val;
+        n1.val=n2.val;
+        n2.val=temp;
+        
     }
 }
