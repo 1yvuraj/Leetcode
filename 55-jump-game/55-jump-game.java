@@ -1,6 +1,6 @@
 class Solution{
     public boolean canJump(int[] nums) {
-       boolean []dp=new boolean[nums.length+1];
+       boolean []dp=new boolean[nums.length];
        return help(nums,dp);
     }
     public boolean help(int[] nums,boolean []dp) {
