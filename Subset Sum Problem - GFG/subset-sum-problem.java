@@ -31,28 +31,30 @@ class GFG
 
 
 //User function Template for Java
-
 class Solution{
+   static boolean isSubsetSumHelper(int N, int arr[], int sum, Boolean[][]dp){
+       //if(sum<0)return 0;
+       if(N==0 || sum==0)
+         {
+             return dp[N][sum]=sum==0?true:false;
+         }
+
+    // IDHR SE
+      if(dp[N][sum]!=null){
+          return dp[N][sum];
+      }
+   // IDHR tk
+       boolean isSubsetSum = false;
+       if(sum-arr[N-1]>=0){
+       isSubsetSum =isSubsetSum || isSubsetSumHelper(N-1,arr,sum-arr[N-1],dp) ;
+       }
+       isSubsetSum = isSubsetSum ||  isSubsetSumHelper(N-1,arr,sum,dp);
+       return dp[N][sum]=isSubsetSum ;
+   }
+
     static Boolean isSubsetSum(int N, int arr[], int sum){
-        // code here
-        Boolean[][] dp = new Boolean[N+1][sum+1];
-        return helper(arr.length,arr,sum,dp);
-    } 
-    public static boolean helper(int n , int[] arr , int sum , Boolean[][] dp){
-        // base case 
-         if(n==0 || sum==0)
-         {
-             return dp[n][sum]=sum==0?true:false;
-         }
-         if(dp[n][sum]!=null)return dp[n][sum] ;
-         boolean res=false;
-         if(sum-arr[n-1]>=0)
-         {
-             res=res||helper(n-1,arr,sum-arr[n-1],dp);
-         }
-         res=res||helper(n-1,arr,sum,dp);
-         return dp[n][sum]=res;
-         
-         
+        Boolean dp[][] = new Boolean[N+1][sum+1];
+        return isSubsetSumHelper(N,arr,sum, dp);
+    
     }
 }
