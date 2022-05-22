@@ -4,25 +4,21 @@ class Solution {
         int n=grid[0].length;
         int [][]dir = { { 1,0 }, { 0,1} };
         int [][]dp = new int[m][n];
-        return mazePath2(0, 0, m - 1, n - 1, dir, grid, dp);
+        return help(grid,0, 0, m - 1, n - 1, dir,dp);
     }
-    public static int mazePath2( int sr,int sc,int er, int ec,int[][]dir,int[][]grid, int[][] dp)    {
-        if (sr == er && sc == ec) {
-            return grid[sr][sc];
-        }
-        if (dp[sr][sc] != 0) return dp[sr][sc];
-       
-        int min=(int)1e9;
-         for (int d = 0; d < dir.length; d++) {
+    public int help(int[][]grid,int sr, int sc, int er, int ec, int[][] dir,int[][]dp) {
+        
+        if (sr == er && sc == ec) return grid[sr][sc];
+        if(dp[sr][sc]!=0)return dp[sr][sc];
+        int count = (int)1e9;
+        for (int d = 0; d < dir.length; d++) {
             int r = sr + dir[d][0];
             int c = sc + dir[d][1];
-            if(r >= 0 && c >= 0 && r <= er && c <= ec) {
-                
-                min = Math.min(min,mazePath2(r, c, er, ec, dir, grid, dp));
-                
+            if (r >= 0 && c >= 0 && r <= er && c <= ec) {
+               count=Math.min(count, help(grid,r, c, er, ec, dir,dp)+grid[sr][sc]);
             }
         }
-         
-        return dp[sr][sc] = min+grid[sr][sc];
+        return dp[sr][sc]=count;
     }
+    
 }
