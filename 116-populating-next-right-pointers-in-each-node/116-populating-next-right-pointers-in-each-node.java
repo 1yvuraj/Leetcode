@@ -1,6 +1,11 @@
 class Solution {
     public Node connect(Node root) {
-        if (root==null || root.left == null) return root;
+        help(root);
+        return root;
+        
+    }  
+     public void help(Node root) {
+        if (root==null || root.left == null) return ;
         
         // up down approach, all the process before the recursive function
         // for nodes share same root, simply assign the next of right node to left node
@@ -14,8 +19,7 @@ class Solution {
         // recursive function
         connect(root.right);
         connect(root.left);
-        return root;
         
-    }    
+    }  
     
 }
