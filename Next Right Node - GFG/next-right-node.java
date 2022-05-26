@@ -111,7 +111,7 @@ class Solution{
 		
 	 LinkedList<Node>list=new LinkedList<>();
         list.addLast(root);
-        boolean b=false;
+        
         while(list.size()>0)
         {
              int size=list.size();
