@@ -112,25 +112,19 @@ class Tree {
 
 class Solution
 {
-    
-     static int  ans;
     public static int maxPathSum(Node root)
     {
-      int  max=0;
-      ans=-(int)1e9;
-       help(root,max);
-       return ans;
+       return help(root);
     }
-     public static void help(Node root,int max)
+     public static int help(Node root)
     {
         if(root==null)
         {
-            ans=Math.max(ans,max);
-            
-            return ;
+            return 0;
         }
        
-       help(root.left,max+root.data);
-       help(root.right,max+root.data);
+      int l= help(root.left);
+      int r= help(root.right);
+      return Math.max(l,r)+root.data;
     }
 }
