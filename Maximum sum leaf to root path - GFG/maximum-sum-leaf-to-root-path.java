@@ -128,29 +128,45 @@ class Tree {
 //       return Math.max(l,r)+root.data;
 //     }
 // }
+// class Solution
+// {
+//     public static int maxPathSum(Node root)
+//     {
+//       return help(root);
+//     }
+//      public static int help(Node root)
+//     {
+//         if(root.left!=null && root.right!=null){
+//             int l=help(root.left);
+//             int r=help(root.right);
+//             return Math.max(l,r)+root.data;
+//         }
+//         else if(root.left!=null)
+//         {
+//             int l=help(root.left);
+//             return l+root.data;
+//         }else if(root.right!=null)
+//         {
+//              int r=help(root.right);
+//             return r+root.data;
+//         }else{
+//             return root.data;
+//         }
+//     }
+// }
 class Solution
 {
+    static int max;
     public static int maxPathSum(Node root)
     {
-       return help(root);
+       max=-(int)1e9;
+       help(root,0);
+       return max;
     }
-     public static int help(Node root)
-    {
-        if(root.left!=null && root.right!=null){
-            int l=help(root.left);
-            int r=help(root.right);
-            return Math.max(l,r)+root.data;
-        }
-        else if(root.left!=null)
-        {
-            int l=help(root.left);
-            return l+root.data;
-        }else if(root.right!=null)
-        {
-             int r=help(root.right);
-            return r+root.data;
-        }else{
-            return root.data;
-        }
+     public static void help(Node root,int ans)
+    {   if(root==null)return ;
+        if(root.left==null && root.right==null)max=Math.max(max,ans+root.data);
+        help(root.right,ans+root.data);
+        help(root.left,ans+root.data);
     }
 }
