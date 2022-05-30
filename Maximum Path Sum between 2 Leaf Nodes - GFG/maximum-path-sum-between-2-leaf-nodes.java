@@ -115,29 +115,42 @@ class GFG {
         left = right = null;
     }
 } */
-class Solution{
-
-
-int sum=Integer.MIN_VALUE;
-       int findMaxPathSum(Node root){
-           if(root==null)return 0;
-           int lsum=findMaxPathSum(root.left);
-           int rsum=findMaxPathSum(root.right);
-           if(root.left== null && root.right==null)return root.data;
-           if(root.left==null) return root.data+ rsum;
-           if(root.right==null) return root.data+lsum;
-           sum=Math.max(sum, root.data+lsum+rsum);
-           return Math.max(root.data+lsum, root.data+rsum);
-           
-       }
+class Solution
+{
+     static int max=-(int)1e9;
+    public static int maxPathSum(Node root)
+    {
+        max=-(int)1e9;
+        if(root.left!=null && root.right!=null) 
+        {
+            help(root);
+            return max;
+        }else{
+            int val=help(root);
+            return Math.max(max,val);
+        }
        
-       int maxPathSum(Node root)
-       {
-          int ans=findMaxPathSum(root);
-          if(root.left==null || root.right==null) 
-              sum=Math.max(sum,ans);
-          return sum;
+    }
+     public static int help(Node root)
+    {
+        if(root.left!=null && root.right!=null){
+            int l=help(root.left);
+            int r=help(root.right);
+            max=Math.max(max,l+r+root.data);
+            return Math.max(l,r)+root.data;
+        }
+        else if(root.left!=null)
+        {
+            int l=help(root.left);
            
-       }
-       
+            return l+root.data;
+        }else if(root.right!=null)
+        {
+             int r=help(root.right);
+            
+            return r+root.data;
+        }else{
+            return root.data;
+        }
+    }
 }
