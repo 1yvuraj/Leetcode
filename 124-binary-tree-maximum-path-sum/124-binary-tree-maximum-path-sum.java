@@ -13,24 +13,25 @@
  *     }
  * }
  */
-class Solution {
-    int max=-(int)1e9;
+class Solution
+{ 
+    
+    
     public int maxPathSum(TreeNode root) {
-        max=-(int)1e9;
-        help(root);
-         return max;
+        int[]max=new int[1];
+        max[0]=-(int)1e9;
+        help(root,max);
+         
+        return max[0];
     }
-    public int help(TreeNode root) {
-        if(root==null)return 0;
-        int l=help(root.left);
-        int r=help(root.right);
-        int ldash=Math.max(0,l);
-        int rdash=Math.max(0,r);
-        int sumNTN=ldash+rdash+root.val;
-        max=Math.max(max,sumNTN);
-        return Math.max(ldash,rdash)+root.val;
-        
-        
-        
+    public int help(TreeNode root,int[]max) {
+        if (root == null) return 0;
+        int l = help(root.left,max);
+        int r = help(root.right,max);
+        int ldash = Math.max(0, l);
+        int rdash = Math.max(0, r);
+        int sumNTN = ldash + rdash + root.val;
+        max[0] = Math.max(max[0], sumNTN);
+        return Math.max(ldash, rdash) + root.val;
     }
 }
