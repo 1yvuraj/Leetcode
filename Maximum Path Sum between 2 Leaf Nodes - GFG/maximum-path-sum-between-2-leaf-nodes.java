@@ -115,77 +115,29 @@ class GFG {
         left = right = null;
     }
 } */
-// class Solution
-// {
-//     public static class pair{
-//     long Ntlpath=-(long)1e11;
-//     long ltlpath=-(long)1e11;
-//   }
-//   public static pair maxPathSu(Node root) {
-      
-//     if(root==null){
-//         pair p=new pair();
-//         p.Ntlpath=0;
-//         return p;
-        
-//     }
-    
-//     if(root.left==null && root.right==null)
-//     {
-//       pair a=new pair();
-//       a.Ntlpath=(long)root.data;
-
-//       return a;
-//     }
-    
-//     pair l=maxPathSu(root.left);
-//     pair r=maxPathSu(root.right);
-//     pair ans=new pair();
-//     ans.ltlpath=Math.max(r.ltlpath,l.ltlpath);
-//     if(root.left!=null && root.right!=null)
-//     {
-//       ans.ltlpath=Math.max(ans.ltlpath,l.Ntlpath+r.Ntlpath+(long)root.data);
-//     }
-//     ans.Ntlpath=Math.max(l.Ntlpath,r.Ntlpath)+(long)root.data;
-//     return ans;
-//   }
-    
-//   public static int maxPathSum(Node root) {
-//     return (int)(maxPathSu(root).ltlpath%(1000000007));
-//   }
-// }
+class Solution{
 
 
-
-class Solution
-{
-    int res = Integer.MIN_VALUE;
-    
-    int maxPathSumUtil(Node root) {
-        if (root == null) 
-            return 0;
-        if (root.left == null && root.right == null) 
-            return root.data;
-
-        int ls = maxPathSumUtil(root.left);
-        int rs = maxPathSumUtil(root.right);
-
-        if (root.left != null && root.right != null) {
-            res = Math.max(res, (ls + rs + root.data));
-            return Math.max(ls, rs) + root.data;
-        }
-        if (root.left == null)
-            return rs + root.data;
-        else
-            return ls + root.data;
-    }
-
-    int maxPathSum(Node root) {
-        int h=maxPathSumUtil(root);
-        if(root.left==null || root.right==null)
-        {
-            res=Math.max(res,h);
-        }
-        return res;
-    }
+int sum=Integer.MIN_VALUE;
+       int findMaxPathSum(Node root){
+           if(root==null)return 0;
+           int lsum=findMaxPathSum(root.left);
+           int rsum=findMaxPathSum(root.right);
+           if(root.left== null && root.right==null)return root.data;
+           if(root.left==null) return root.data+ rsum;
+           if(root.right==null) return root.data+lsum;
+           sum=Math.max(sum, root.data+lsum+rsum);
+           return Math.max(root.data+lsum, root.data+rsum);
+           
+       }
+       
+       int maxPathSum(Node root)
+       {
+          int ans=findMaxPathSum(root);
+          if(root.left==null || root.right==null) 
+              sum=Math.max(sum,ans);
+          return sum;
+           
+       }
+       
 }
