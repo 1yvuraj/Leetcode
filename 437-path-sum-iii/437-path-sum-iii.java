@@ -1,22 +1,32 @@
 class Solution {
-    int ans=0;
+    int main = 0;
     public int pathSum(TreeNode root, int targetSum) {
-        ans=0;
-        help1(root,targetSum);
-        return ans;
+        if(root==null)return 0;
+        main = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(0,1);
+        help1(root, root.val, targetSum, map);
+        return main;
     }
-    public void help2(TreeNode root, int sum,int targetSum) {
-        if(root==null)return;
-        if(sum+root.val==targetSum)ans++;
-        help2(root.left,sum+root.val,targetSum);
-        help2(root.right,sum+root.val,targetSum);
-        
-    }
-     public void help1(TreeNode root,int targetSum) {
-        if(root==null)return;
-        help2(root,0,targetSum);
-        help1(root.left,targetSum);
-        help1(root.right,targetSum);
-        
+
+    public void help1(TreeNode root, int sum, int targetSum, HashMap<Integer, Integer> map) {
+        if (root == null) return;
+        if (map.containsKey(sum - targetSum)) {
+            main+=map.get(sum - targetSum);
+        }
+        if (map.containsKey(sum)) {
+            map.put(sum, map.get(sum) + 1);
+        } else {
+            map.put(sum, 1);
+        }
+        if(root.left!=null)
+        help1(root.left, sum + root.left.val,targetSum, map);
+        if(root.right!=null)
+        help1(root.right, sum + root.right.val,targetSum, map);
+        if (map.get(sum) == 1) {
+            map.remove(sum);
+        } else {
+            map.put(sum, map.get(sum) - 1);
+        }
     }
 }
