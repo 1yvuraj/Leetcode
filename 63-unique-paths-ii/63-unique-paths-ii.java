@@ -19,7 +19,7 @@ class Solution {
                     return dp[sr][sc];
                 }
                 int count = 0;
-                obstacleGrid[sr][sc] = 1;
+                //obstacleGrid[sr][sc] = 1;
                 for (int d = 0; d < dir.length; d++) {
                     int r = i + dir[d][0];
                     int c = j + dir[d][1];
@@ -28,7 +28,7 @@ class Solution {
                     }
                 }
                 dp[i][j]=count;
-                obstacleGrid[sr][sc] = 0;
+                //obstacleGrid[sr][sc] = 0;
                 
             }
             
